@@ -9,6 +9,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '
 import HomeScreen from './HomeScreen';
 import ContactScreen from './ContactScreen';
 import AboutScreen from './AboutScreen';
+import ReservationScreen from './ReservationScreen';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchPartners } from '../features/partners/partnersSlice';
@@ -47,8 +48,34 @@ const ContactNavigator = () => {
                 })}
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
+
+const ReservationNavigator = () => {
+    const Stack = createStackNavigator();
+    
+    return (
+        <Stack.Navigator
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen
+                name="Reservation"
+                component={ReservationScreen}
+                options={({ navigation}) => ({ 
+                    title: 'Reservation Search',
+                    headerLeft: () => (
+                        <Icon
+                            name='tree'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
 
 const AboutNavigator = () => {
     const Stack = createStackNavigator();
@@ -192,6 +219,21 @@ const Main = () => {
                         drawerIcon: ({ color }) => (
                             <Icon 
                                 name='list'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }} 
+                />
+                <Drawer.Screen
+                    name='ReserveCampsite'
+                    component={ReservationNavigator}
+                    options={{ title: 'Reserve Campsite',
+                        drawerIcon: ({ color }) => (
+                            <Icon 
+                                name='tree'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}
